@@ -1,0 +1,19 @@
+{
+  "name": "internship-project",
+  "version": "1.0.0",
+  "description": "Parking Allocation system",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samarth Amodkar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "request": "^2.88.2"
+  }
+}
