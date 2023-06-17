@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin & Dashboard</title>
+  <link rel="stylesheet" href="../assets/sidebar.css">
+  <!-- box icon -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_details">
+          <div class="logo_name">
+         <h4 style="color: black; margin:60px;">ADMIN</h4>
+          </div>
+        </div>
+        <ul>
+          <li>
+            <a href="/side_bar" class="active">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">
+                Dashboard
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <!-- <i class='bx bx-user'></i> -->
+              <i style="color:black" class="bx bx-user"></i>
+              <span class="links_name">
+                Profile
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/_card">
+              <i style="color:black" class='bx bx-cart-alt'></i>
+              <span class="links_name">
+                Parking Slot
+              </span>
+            </a>
+          </li>
+          <li style="color:black" class="login">
+            <a href="#">
+              <span class="links_name login_out">
+                Login Out
+              </span>
+              <i class='bx bx-log-out' id="log_out"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- top header -->
+      <section class="home_section">
+        <div class="topbar">
+          <div class="toggle">
+            <i class='bx bx-menu' id="btn"></i>
+          </div>
+          <div class="search_wrapper">
+            <label>
+              <span>
+                <i class='bx bx-search'></i>
+              </span>
+              <input type="search" placeholder="Search...">
+            </label>
+          </div>
+        </div> 
+        </section>
+</body>
+</html>
