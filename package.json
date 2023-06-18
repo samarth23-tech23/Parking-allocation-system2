@@ -1,19 +1,21 @@
 {
-  "name": "internship-project",
-  "version": "1.0.0",
-  "description": "Parking Allocation system",
-  "main": "app.js",
-  "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Samarth Amodkar",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "bootstrap": "^5.3.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "lodash": "^4.17.21",
-    "request": "^2.88.2"
-  }
+    "mongodb": "^5.6.0",
+    "mongoose": "^7.3.0",
+    "nodemon": "^2.0.22"
+  },
+  "name": "park_sys2",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    
+</head>
+<body>
+    <div class="container mt-5 shadow-lg p-5" style="width: 35%">
+        <form class="form-horizontal" role="form" action="/signup" method="post" class="singup">
+            <h2 class="text-center">Registration</h2>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                <div class="col-sm-9">
+                    <input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus name="fname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                <div class="col-sm-9">
+                    <input type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus name="lname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Username </label>
+                <div class="col-sm-9">
+                    <input type="text" id="email" placeholder="@username" class="form-control" name= "name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" id="email" placeholder="email" class="form-control" name= "email">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthDate" class="col-sm-3 control-label">Flat No</label>
+                <div class="col-sm-9">
+                    <input type="number" id="flatno" class="form-control" name="flatno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="wname" class="col-sm-3 control-label">Wing Name</label>
+                <div class="col-sm-9">
+                    <input type="text" id="wname" class="form-control" name="wingname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
+                <div class="col-sm-9">
+                    <input type="phoneNumber" id="phoneNumber" placeholder="Phone number" class="form-control" name="phno">
+                    <span class="help-block">Your phone number won't be disclosed anywhere </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-3 control-label">Password*</label>
+                <div class="col-sm-9">
+                    <input type="password" id="password" placeholder="Password" class="form-control" name="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1" class="col-sm-3 control-label">Upload Profile Picture</label>
+                <div class="col-sm-9">
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>        
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1" class="col-sm-3 control-label">Upload Government Approved Index 2 Copy in JPEG/PDF file*</label>
+                <div class="col-sm-9">
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+                
+            </div>
+           
+                           
+           
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form> <!-- /form -->
+    </div> <!-- ./container -->
+</body>
+</html>
