@@ -27,7 +27,7 @@ app.get("/signup",(req,res)=> {
 app.post("/login", async (req, res) => {
     try {
         const check = await collection.findOne({ name: req.body.name });
-        if (check.password === req.body.password) {
+        if (check.password === req.body.password ) {
             res.render("home")
         } else {
             res.send("Incorrect Password")
@@ -36,9 +36,9 @@ app.post("/login", async (req, res) => {
         res.send("Wrong input credentials");
     }
 
-    await collection.insertMany([data])
+   
     
-    res.render("home")
+    // res.render("home")
 });
 
 
