@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup Data</title>
+</head>
+<body>
+  <h1>Signup Data</h1>
+  <% if (signups.length > 0) { %>
+    <ul>
+      <% signups.forEach(function(signup) { %>
+        <li>
+          <strong>First Name:</strong> <%= signup.fname %><br>
+          <strong>Last Name:</strong> <%= signup.lname %><br>
+          <strong>Name:</strong> <%= signup.name %><br>
+          <strong>Email:</strong> <%= signup.email %><br>
+          <strong>Flat Number:</strong> <%= signup.flatno %><br>
+          <strong>Wing Name:</strong> <%= signup.wingname %><br>
+          <strong>Phone Number:</strong> <%= signup.phno %><br>
+          <strong>Password:</strong> <%= signup.password %><br>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No signups found.</p>
+  <% } %>
+</body>
+</html>
