@@ -22,7 +22,7 @@
           }
 
           .sectionimg{
-            background-image: url(../public/images/parking.jpg);
+            background-image: url('/images/parking.jpg');
             
           }
 

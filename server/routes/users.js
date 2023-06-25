@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router();
-
+const Signup=require("./mongodb");
 
 router.get("/login",(req,res)=>{
     res.render('login')
@@ -14,7 +14,7 @@ router.post("/login", async (req, res) => {
     try {
         const check = await Signup.findOne({ name: req.body.name });
         if (check.password === req.body.password ) {
-            res.redirect("homepage"); //login into profile
+            res.render("homepage"); //login into profile
         } else {
             res.send("Incorrect Password")
         }
