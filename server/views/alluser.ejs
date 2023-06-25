@@ -1,8 +1,8 @@
 <%- include('side_bar.ejs'); -%>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <!-- Apply custom styling -->
- <link rel="stylesheet" href="..\allusers.css">
+<!-- Apply custom styling -->
+<link rel="stylesheet" href="..\allusers.css">
 </head>
 <body>
   <div class="container py-5">
@@ -14,10 +14,7 @@
             <div class="table-responsive">
               <table class="table table-bordered mb-0">
                 <thead>
-                
-
                   <tr>
-                   
                     <th> First Name</th>
                     <th> Last Name</th>
                     <th>Username</th>
@@ -31,12 +28,10 @@
                     <th>Verification</th>
                   </tr>
                 </thead>
-                
                 <% if (signups.length > 0) { %>
                 <tbody>
                   <% signups.forEach(function(signup) { %>
                   <tr>
-                  
                     <td><%= signup.fname %></td>
                     <td><%= signup.lname %></td>
                     <td><%= signup.name %></td>
@@ -47,19 +42,24 @@
                     <td><%= signup.password %></td>
                     <td><a href="/uploads/<%= signup.profilePicture %>">View Profile Picture</a></td>
                     <td><a href="/uploads/<%= signup.govtPaper %>">View Government Paper</a></td>
-                  
-                    <td><button class="btn btn-verify" onclick="changeText(this)">
-                        <span class="btn-text">Verify</span>
-                        <span class="btn-bg"></span>
-                      </button>
-                     
+                    <td>
+                      <% if (signup.status === 'approved') { %>
+                        <button class="btn btn-verify" disabled>
+                          <span class="btn-text">Verified</span>
+                          <span class="btn-bg"></span>
+                        </button>
+                      <% } else { %>
+                        <button class="btn btn-verify" onclick="changeText(this, '<%= signup._id %>')">
+                          <span class="btn-text">Verify</span>
+                          <span class="btn-bg"></span>
+                        </button>
+                      <% } %>
                     </td>
-                    <% }); %>
                   </tr>
-                  <!-- Add more table rows as needed -->
+                  <% }); %>
                 </tbody>
                 <% } else { %>
-                  <p>No signups found.</p>
+                <p>No signups found.</p>
                 <% } %>
               </table>
             </div>
@@ -79,11 +79,25 @@
       card.classList.add('animated', 'slideIn');
     });
 
-    function changeText(button) {
-  setTimeout(function() {
-    button.querySelector('.btn-text').textContent = 'Verified';
-  }, 2000);
-}
+    function changeText(button, signupId) {
+      console.log(signupId);
+      fetch(`updatestatus/${signupId}`, {
+        method: "POST"
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          if (data.status === 'approved') {
+            button.querySelector('.btn-text').textContent = 'Verified';
+            button.setAttribute('disabled', 'disabled'); // Disable the button to prevent further changes
+          } else {
+            button.querySelector('.btn-text').textContent = 'Verify';
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   </script>
 
 </body>

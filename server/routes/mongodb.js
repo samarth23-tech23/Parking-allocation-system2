@@ -56,6 +56,11 @@ const signupSchema=mongoose.Schema({
       govtPaper: {
         type: String,
         required: true,
+      },
+      status:{
+        type:String,
+        required:true,
+        default:"pending",
       }
   
 });
