@@ -31,10 +31,12 @@
                     <th>Verification</th>
                   </tr>
                 </thead>
+                
+                <% if (signups.length > 0) { %>
                 <tbody>
-                  <% if (signups.length > 0) { %>
+                  <% signups.forEach(function(signup) { %>
                   <tr>
-                    <% signups.forEach(function(signup) { %>
+                  
                     <td><%= signup.fname %></td>
                     <td><%= signup.lname %></td>
                     <td><%= signup.name %></td>
@@ -43,15 +45,16 @@
                     <td><%= signup.email %></td>
                     <td><%= signup.phno %></td>
                     <td><%= signup.password %></td>
-                    <td>imag1.jpeg</td>
-                    <td>imag1.jpeg</td>
+                    <td><a href="/uploads/<%= signup.profilePicture %>">View Profile Picture</a></td>
+                    <td><a href="/uploads/<%= signup.govtPaper %>">View Government Paper</a></td>
                   
                     <td><button class="btn btn-verify" onclick="changeText(this)">
                         <span class="btn-text">Verify</span>
                         <span class="btn-bg"></span>
                       </button>
-                      <% }); %>
+                     
                     </td>
+                    <% }); %>
                   </tr>
                   <!-- Add more table rows as needed -->
                 </tbody>

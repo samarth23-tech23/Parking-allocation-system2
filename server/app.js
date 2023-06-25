@@ -3,6 +3,7 @@ const bodyParser=require("body-parser");
 const _=require("lodash");
 const admin=require("./routes/admin");
 const users=require("./routes/users");
+const path = require('path');
 
 
 const ejs=require("ejs");
@@ -14,27 +15,16 @@ const port=3000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine','ejs');
 app.use(express.static("public"));
+
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'views')));
+
+
+
 app.use("/admin",admin);
 app.use("/user",users);
 
-
-// app.get('/side_bar', (req, res) => {
-//     res.render('side_bar'); // Render the "side_bar" view
-// });
-
-// app.get('/_card', (req, res) => {
-//   res.render('_card'); // Render the "card" view
-
-// });
-
-// app.get('/table_info', (req, res) => {
-//   res.render('table_info'); // Render the "table" view
-// });
-
-
-// app.get('/page1', (req, res) => {
-//   res.render('page1'); // Render the "table" view
-// });
 
 
 app.get("/",(req,res)=>{

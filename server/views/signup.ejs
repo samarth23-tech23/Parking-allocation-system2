@@ -157,7 +157,7 @@
 </head>
 <body>
     <div class="containereg mx-auto shadow-lg p-5">
-        <form class="form-horizontal" role="form" action="/user/signup" method="post" class="signup">
+        <form class="form-horizontal" role="form" action="/user/signup" method="post" class="signup"  enctype="multipart/form-data">
             <h2><center>Registration</center></h2><br>
             <div class="form-row">
                 <div class="form-group">
@@ -199,11 +199,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="file" id="profilePicture" class="form-control-file" >
+                <input type="file" id="profilePicture" name="profilePicture" class="form-control-file" >
                 <label for="profilePicture" style="color: #970808; font-weight: bold;">Upload Profile Picture</label>
             </div>
             <div class="form-group">
-                <input type="file" id="index2Copy" class="form-control-file" >
+                <input type="file" id="index2Copy" name="govtPaper"  class="form-control-file" >
                 <label for="index2Copy" style="color: #970808; font-weight: bold;">Upload Government Approved Index 2 Copy in JPEG/PDF file*</label>
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="background:#ffcc00; color:#970808; font-weight: bold;">Register</button>

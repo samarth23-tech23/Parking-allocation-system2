@@ -48,9 +48,17 @@ const signupSchema=mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    profilePicture: {
+        type: String,
+        required: true,
+      },
+      govtPaper: {
+        type: String,
+        required: true,
+      }
   
-})
+});
 
 const Signup=new mongoose.model("Signup",signupSchema)
 
