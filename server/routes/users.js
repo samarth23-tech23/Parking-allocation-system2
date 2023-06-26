@@ -52,15 +52,6 @@ const storage = multer.diskStorage({
   
   
 
-
-
-
-
-
-
-
-
-
 router.get("/login",(req,res)=>{
     res.render('login')
 });
@@ -70,18 +61,24 @@ router.get("/signup",(req,res)=>{
 });
 
 router.post("/login", async (req, res) => {
-    try {
-        const check = await Signup.findOne({ name: req.body.name });
-        if (check.password === req.body.password ) {
-            res.render("homepage"); //login into profile
-        } else {
-            res.send("Incorrect Password")
-        }
-    } catch (error) {
-        res.send("Wrong input credentials");
+  try {
+    const username = req.body.name.trim(); // Remove leading/trailing spaces
+    if (username.toLowerCase() === "admin" && req.body.password === "admin") {
+      res.redirect("/admin/dashboard");
+    } else {
+      const check = await Signup.findOne({ name: { $regex: new RegExp(`^${username}$`, "i") } });
+      if (check && check.password === req.body.password) {
+        res.render("homepage"); // login into profile
+      } else {
+        res.send("Incorrect Username or Password");
+      }
     }
-
+  } catch (error) {
+    res.send("An error occurred");
+  }
 });
+
+
 
 
 

@@ -2,7 +2,9 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <!-- Apply custom styling -->
-<link rel="stylesheet" href="..\allusers.css">
+<link rel="stylesheet" href="../allusers.css">
+  <!-- Include the required library -->
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 <body>
   <div class="container py-5">
@@ -11,12 +13,39 @@
         <div class="card table-red card-animation">
           <div class="card-body">
             <h2 class="text-center text-black mb-4">Car Details</h2>
+            
+            <!-- Filter and search form -->
+            <form class="mb-4">
+              <div class="form-row align-items-center">
+                <div class="col-md-3 mb-2">
+                  <select class="form-control" id="filterDropdown">
+                    <option value="all">All</option>
+<option value="fname">First Name</option>
+<option value="lname">Last Name</option>
+<option value="name">Username</option>
+<option value="flatno">Flat No</option>
+<option value="wingname">Wing Name</option>
+<option value="email">Email Id</option>
+<option value="phno">Phone No</option>
+<option value="password">Password</option>
+
+                  </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                  <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                </div>
+                <div class="col-md-3 mb-2">
+                  <button type="button" class="btn btn-primary" onclick="filterTable()">Filter/Search</button>
+                </div>
+              </div>
+            </form>
+            
             <div class="table-responsive">
-              <table class="table table-bordered mb-0">
+              <table class="table table-bordered mb-0" id="dataTable">
                 <thead>
                   <tr>
-                    <th> First Name</th>
-                    <th> Last Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Username</th>
                     <th>Flat No</th>
                     <th>Wing Name</th>
@@ -63,6 +92,12 @@
                 <% } %>
               </table>
             </div>
+
+            <!-- Add a button for downloading table data -->
+            <div class="text-center mt-4">
+              <button type="button" class="btn btn-primary" onclick="exportTableToExcel()">Download Excel</button>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -98,6 +133,69 @@
           console.log(error);
         });
     }
+    
+    function filterTable() {
+  const filterDropdown = document.getElementById('filterDropdown');
+  const searchInput = document.getElementById('searchInput');
+  const dataTable = document.getElementById('dataTable');
+  const rows = dataTable.getElementsByTagName('tr');
+  const filterIndex = filterDropdown.selectedIndex;
+  const searchText = searchInput.value.toLowerCase();
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const columns = row.getElementsByTagName('td');
+    let showRow = false;
+
+    if (filterIndex === 0) {
+      // Filter by all columns
+      for (let j = 0; j < columns.length; j++) {
+        const columnText = columns[j].textContent.toLowerCase();
+        if (columnText.includes(searchText)) {
+          showRow = true;
+          break;
+        }
+      }
+    } else {
+      // Filter by selected column
+      const columnText = columns[filterIndex - 1].textContent.toLowerCase();
+
+      // Special case for Wing Name column
+      if (filterIndex === 5 && columnText.trim().toLowerCase().includes(searchText)) {
+        showRow = true;
+      } else if (columnText.includes(searchText)) {
+        showRow = true;
+      }
+    }
+
+    if (showRow) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  }
+}
+
+
+    function exportTableToExcel() {
+      const table = document.getElementById('dataTable');
+      const rows = Array.from(table.getElementsByTagName('tr'));
+
+      // Prepare the data array for Excel export
+      const data = rows.map(row => Array.from(row.children).map(cell => cell.textContent));
+
+      // Create a new workbook
+      const workbook = XLSX.utils.book_new();
+
+      // Add a worksheet
+      const worksheet = XLSX.utils.aoa_to_sheet(data);
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Table Data');
+
+      // Export the workbook to Excel file
+      XLSX.writeFile(workbook, 'table_data.xlsx');
+    }
   </script>
+
+
 
 </body>
