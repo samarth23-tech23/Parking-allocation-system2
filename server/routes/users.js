@@ -82,7 +82,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       console.error("Error occurred during logout:", err);
     }
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 
@@ -171,7 +171,7 @@ router.post("/addVehicle", requireLogin, async (req, res) => {
     // Save the updated user object
     await user.save();
 
-    res.redirect("/profile");
+    res.redirect("profile");
   } catch (error) {
     console.error("Error adding vehicle details:", error);
     res.status(500).send("Error adding vehicle details");
