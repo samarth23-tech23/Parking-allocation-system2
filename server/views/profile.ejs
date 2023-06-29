@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <% if (user.vehicleDetails && user.vehicleDetails.length > 0) { %>
+    <% if (user.vehicleDetails && user.vehicleDetails.length > 0 && user.vehicleDetails[0].vehicleType && user.vehicleDetails[0].vehicleNumber) { %>
     <div class="vehicle-list">
       <h3>Vehicle List</h3>
       <table class="table">
@@ -34,6 +34,7 @@
           <tr>
             <th>Vehicle Type</th>
             <th>Vehicle Number</th>
+            <th>Parking Slot</th> <!-- Added Parking Slot column -->
           </tr>
         </thead>
         <tbody>
@@ -41,6 +42,7 @@
           <tr>
             <td><%= vehicle.vehicleType %></td>
             <td><%= vehicle.vehicleNumber %></td>
+            <td><%= vehicle.parkingSlot %></td> <!-- Display Parking Slot value -->
           </tr>
           <% }); %>
         </tbody>
