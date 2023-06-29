@@ -1,42 +1,104 @@
-/* profile.css */
 
+    
+body, p, td, input, button {
+  font-family: sans-serif;
+}
+.profile-info p {
+  margin-bottom: 10px;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.vehicle-details {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 20px;
+}
+.vehicle-details:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+/* Custom color theme */
+body {
+  background-color: #f4f4f4;
+  color: #333333;
+}
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px;
-  }
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 30px;
+  margin-top: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  position: relative;
+}
+.profile-info {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+}
+.card-header {
+  background-color: #000000;
+  border-bottom: none;
+  font-weight: bold;
+  color: #f9f9f9;
   
-  h1, h2, h3 {
-    color: #333;
-  }
-  
-  .profile-info {
-    margin-bottom: 30px;
-  }
-  
-  .vehicle-details {
-    margin-top: 50px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0062cc;
-    border-color: #0062cc;
-  }
-  
-  .text-center {
-    text-align: center;
-  }
-  
-  .mt-5 {
-    margin-top: 2.5rem;
-  }
-  
+
+}
+.pro{
+text-shadow: 4px 4px 36px rgba(0,0,0,0.6);
+font-weight: bold;
+color: #000000;
+}
+
+.pname, .vlist, .vdetails {
+text-shadow: 23px 8px 24px rgba(156,156,156,1);
+font-weight: bold; 
+}
+
+.vehicle-list {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+}
+.vehicle-list h3 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.vehicle-list table {
+  margin-top: 10px;
+}
+.vehicle-list table th {
+  font-weight: bold;
+  border-top: none;
+}
+.vehicle-list table td {
+  vertical-align: middle;
+}
+.vehicle-list p {
+  margin-top: 10px;
+}
+.vehicle-details {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+}
+.vehicle-details h3 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.form-group label {
+  font-weight: bold;
+}
+.btn-primary {
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+.btn-primary:hover {
+  background-color: #23527c;
+  border-color: #23527c;
+}
