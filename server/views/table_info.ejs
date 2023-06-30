@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
   <title>Car Details</title>
   <!-- Include Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -61,9 +62,7 @@
   </style>
 </head>
 <body>
-  <!-- Include sidebar if needed -->
-  <%- include("side_bar") -%>
-
+  <%- include('side_bar'); -%>
   <div class="container py-5">
     <div class="row justify-content-center">
       <div style="margin-left: 236px;" class="col-lg-8">
@@ -74,42 +73,24 @@
               <table class="table table-bordered mb-0">
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>Car No</th>
+                    <th>Owner Full Name</th>
                     <th>Flat No</th>
                     <th>Wing Name</th>
                     <th>Phone No</th>
-                    <th>Vehicle Type</th>
-                    <th>Vehicle Number</th>
-                    <th>Parking Slot</th>
-                    <th>Assign</th>
+                    <th>Photo</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% users.forEach(function(user) { %>
-                    <%console.log(user.vehicleDetails) %>
-                    <% user.vehicleDetails.forEach(function(vehicle) { %>
-                      <tr>
-                        
-                        <td><%= user.name %></td>
-                        <td><%= user.flatno %></td>
-                        <td><%= user.wingname %></td>
-                        <td><%= user.phno %></td>
-                        <td><%= vehicle.vehicleType %></td>
-                        <td><%= vehicle.vehicleNumber %></td>
-                        <td>
-                          <select class="form-control parking-slot" data-vehicle-id="<%= vehicle._id %>">
-                            <option value="P1" <%= vehicle.parkingSlot === 'P1' ? 'selected' : '' %>>P1</option>
-                            <option value="P2" <%= vehicle.parkingSlot === 'P2' ? 'selected' : '' %>>P2</option>
-                            <option value="P3" <%= vehicle.parkingSlot === 'P3' ? 'selected' : '' %>>P3</option>
-                            <!-- Add more parking slots as needed -->
-                          </select>
-                        </td>
-                        <td>
-                          <button class="btn btn-primary assign-btn" data-user-id="<%= user._id %>" data-vehicle-id="<%= vehicle._id %>">Assign</button>
-                        </td>
-                      </tr>
-                    <% }); %>
-                  <% }); %>
+                  <tr>
+                    <td>ABC123</td>
+                    <td>John Doe</td>
+                    <td>123-456-7890</td>
+                    <td>123-456-7890</td>
+                    <td>123-456-7890</td>
+                    <td>imag1.jpeg</td>
+                  </tr>
+                  <!-- Add more table rows as needed -->
                 </tbody>
               </table>
             </div>
@@ -118,55 +99,17 @@
       </div>
     </div>
   </div>
+  <%- include('./partials/footer'); -%>
 
- <!-- Include the following script -->
-<!-- Include the following script -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const card = document.querySelector('.card-animation');
-    card.classList.add('animated', 'slideIn');
-  });
-
-  // Handle assign button click
-  const assignButtons = document.querySelectorAll('.assign-btn');
-  assignButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-      const userId = button.getAttribute('data-user-id');
-      const vehicleId = button.getAttribute('data-vehicle-id');
-      console.log(vehicleId);
-      const parkingSlot = button.parentNode.parentNode.querySelector('.parking-slot').value;
-
-      // Send a POST request to update parking slot
-      fetch('assign-parking', {
-        method: 'POST',
-        headers: {
-          'Accept':'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId, vehicleId, parkingSlot }),
-      })
-        .then(response => response.json())
-        .then(data => {
-          // Handle the response if needed
-          console.log(data);
-
-          // Update the parking slot value in the UI
-          const row = button.parentNode.parentNode;
-          const parkingSlotCell = row.querySelector('.parking-slot');
-          parkingSlotCell.value = parkingSlot;
-        })
-        .catch(error => {
-          // Handle the error if occurred
-          console.error(error);
-        });
+  <!-- Include Bootstrap JS (Optional) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- Apply animation to the card on page load -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const card = document.querySelector('.card-animation');
+      card.classList.add('animated', 'slideIn');
     });
-  });
-</script>
-
-
-
-
-</script>
+  </script>
 
 </body>
 </html>

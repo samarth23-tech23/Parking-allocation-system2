@@ -110,7 +110,7 @@ router.post(
         profilePicture: req.files["profilePicture"][0].filename,
         govtPaper: req.files["govtPaper"][0].filename,
         fcfsOrder: count + 1, // Set the FCFS order based on the current count
-        vehicleDetails:[],
+        vehicleDetails: [], // Initialize an empty vehicleDetails array
         status: "pending", // Set the default status to "pending"
       });
 
@@ -124,7 +124,6 @@ router.post(
     }
   }
 );
-
 
 router.get("/profile", requireLogin, async (req, res) => {
   try {
