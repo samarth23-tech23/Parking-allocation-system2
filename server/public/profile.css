@@ -43,19 +43,18 @@ body {
   background-color: #000000;
   border-bottom: none;
   font-weight: bold;
-  color: #f9f9f9;
-  
+  color: #f9f9f9; 
 
 }
 .pro{
-text-shadow: 4px 4px 36px rgba(0,0,0,0.6);
-font-weight: bold;
-color: #000000;
+  text-shadow: -6px 4px 12px rgba(0,0,0,0.25);
+  font-weight: bold;
+  color: #000000;
 }
 
 .pname, .vlist, .vdetails {
-text-shadow: 23px 8px 24px rgba(156,156,156,1);
-font-weight: bold; 
+  text-shadow: -6px 4px 12px rgba(0,0,0,0.25);
+  font-weight: bold; 
 }
 
 .vehicle-list {
@@ -95,10 +94,13 @@ font-weight: bold;
   font-weight: bold;
 }
 .btn-primary {
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #000000;
+  border-color: #feffff;
+  font-weight: bold;
 }
 .btn-primary:hover {
-  background-color: #23527c;
-  border-color: #23527c;
+  background-color: #ced5db;
+  border-color: #ffffff;
+  color: #000000;
+  font-weight: bold;
 }
