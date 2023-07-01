@@ -46,41 +46,6 @@ function findVehicleById(user, vehicleId) {
   return user.vehicleDetails.find(v => v._id.toString() === vehicleId);
 }
 
-// Assuming you're using Express.js
-router.post('/reassign-parking', async (req, res) => {
-  const { userId, vehicleId, parkingSlot } = req.body;
-
-  try {
-    // Find the user document by userId
-    const user = await findUserById(userId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    // Find the vehicle details by vehicleId
-    const vehicle = findVehicleById(user, vehicleId);
-    if (!vehicle) {
-      return res.status(404).json({ error: 'Vehicle not found' });
-    }
-
-    // Clear the parking slot for the specified vehicle
-    if (!vehicle.parkingSlot) {
-      return res.status(400).json({ error: 'Parking slot is not assigned' });
-    }
-
-    // Reassign the parking slot
-    vehicle.parkingSlot = parkingSlot;
-
-    // Save the updated user and vehicle in your data source
-    await user.save();
-
-    // Send a response indicating success
-    res.json({ status: 'success', message: 'Parking slot has been reassigned successfully' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error reassigning parking' });
-  }
-});
 
 
 router.post('/assign-parking', async (req, res) => {

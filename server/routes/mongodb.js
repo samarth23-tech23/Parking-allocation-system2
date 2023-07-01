@@ -71,7 +71,7 @@
           vehicleNumber: String,
           parkingSlot: {
             type: String,
-            default: "Not Assigned",
+            default: "",
           },
         },
       ]

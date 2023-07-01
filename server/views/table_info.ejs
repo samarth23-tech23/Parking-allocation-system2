@@ -190,30 +190,30 @@ reassignButtons.forEach(function(button) {
     const vehicleId = button.getAttribute('data-vehicle-id');
     const parkingSlot = button.parentNode.parentNode.querySelector('.parking-slot').value;
 
-    // Send a POST request to clear parking slot
-    fetch('reassign-parking', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ userId, vehicleId, parkingSlot })
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Error reassigning parking');
-        }
+    fetch('assign-parking', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, vehicleId, parkingSlot }),
       })
-      .then(data => {
-        // Handle the response if needed
-        console.log(data);
-        // Rest of the code
-      })
-      .catch(error => {
-        // Handle the error if occurred
-        console.error(error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response if needed
+          console.log(data);
+
+          // Update the parking slot value in the UI
+          const row = button.parentNode.parentNode;
+          const parkingSlotCell = row.querySelector('.parking-slot');
+          parkingSlotCell.value = parkingSlot;
+          alert("Parking field set!");
+        })
+        .catch(error => {
+          // Handle any errors during the fetch request
+          console.error('Error assigning parking:', error);
+          alert("Error while setting parking slot!")
+        });
   });
 });
 
