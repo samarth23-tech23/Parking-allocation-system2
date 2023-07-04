@@ -81,6 +81,7 @@
                     <th>Vehicle Type</th>
                     <th>Vehicle Number</th>
                     <th>Parking Slot</th>
+                    <th>Assigned Parking Slot</th>
                     <th>Assign</th>
                     <th>Reassign</th>
                   </tr>
@@ -104,6 +105,7 @@
                             <!-- Add more parking slots as needed -->
                           </select>
                         </td>
+                        <td class="assigned-parking-slot"><%= vehicle.parkingSlot || 'Not Assigned' %></td>
                         <td>
                           <% if (vehicle.parkingSlot) { %>
                             <button class="btn btn-success assign-btn" disabled>Assigned</button>
@@ -165,6 +167,10 @@
           const parkingSlotCell = row.querySelector('.parking-slot');
           parkingSlotCell.value = parkingSlot;
 
+          // Update the assigned parking slot value in the UI
+          const assignedParkingSlotCell = row.querySelector('.assigned-parking-slot');
+          assignedParkingSlotCell.textContent = parkingSlot;
+
           // Disable the assign button and mark it as assigned
           button.disabled = true;
           button.textContent = 'Assigned';
@@ -207,6 +213,11 @@ reassignButtons.forEach(function(button) {
           const row = button.parentNode.parentNode;
           const parkingSlotCell = row.querySelector('.parking-slot');
           parkingSlotCell.value = parkingSlot;
+
+          // Update the assigned parking slot value in the UI
+          const assignedParkingSlotCell = row.querySelector('.assigned-parking-slot');
+          assignedParkingSlotCell.textContent = parkingSlot;
+
           alert("Parking field set!");
         })
         .catch(error => {
