@@ -71,6 +71,7 @@ router.post('/assign-parking', async (req, res) => {
     await user.save();
 
     return res.json({ success: true, message: 'Parking assigned successfully' });
+   
   } catch (err) {
     console.error(err);
     return res.json({ success: false, message: 'Error assigning parking' });
