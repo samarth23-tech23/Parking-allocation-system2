@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Car Details</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- Apply custom styling -->
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .table-red {
+      background-color: #ffffff;
+      color: #721c24;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-red th,
+    .table-red td {
+      text-align: center;
+    }
+
+    .table-red th {
+      background-color: #fa8500;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .table-red tbody tr {
+      transition: background-color 0.3s;
+    }
+
+    .table-red tbody tr:hover {
+      background-color: rgb(241, 170, 0, 0.5);
+      color: black;
+      font-weight: bolder;
+    }
+
+    .table-red tbody td {
+      border-top: none;
+    }
+
+    .card-animation {
+      animation-name: slideIn;
+      animation-duration: 1s;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Include sidebar if needed -->
+  <%- include("side_bar") -%>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div style="margin-left: 236px;" class="col-lg-8">
+        <div class="card table-red card-animation">
+          <div class="card-body">
+            <h2 class="text-center text-black mb-4">Car Details</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered mb-0">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Flat No</th>
+                    <th>Wing Name</th>
+                    <th>Phone No</th>
+                    <th>Vehicle Type</th>
+                    <th>Vehicle Number</th>
+                    <th>Parking Slot</th>
+                    <th>Assigned Parking Slot</th>
+                    <th>Assign</th>
+                    <th>Reassign</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% let assignedSlots = new Set(); %>
+                  <% users.forEach(function(user) { %>
+                    <% user.vehicleDetails.forEach(function(vehicle) { %>
+                      <% if (vehicle.parkingSlot) { %>
+                        <% assignedSlots.add(vehicle.parkingSlot); %>
+                      <% } %>
+                    <% }); %>
+                    <% user.vehicleDetails.forEach(function(vehicle) { %>
+                      <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.flatno %></td>
+                        <td><%= user.wingname %></td>
+                        <td><%= user.phno %></td>
+                        <td><%= vehicle.vehicleType %></td>
+                        <td><%= vehicle.vehicleNumber %></td>
+                        <td>
+                          <select class="form-control parking-slot" data-vehicle-id="<%= vehicle._id %>">
+                            <option value="">Select a parking slot</option>
+                            <option value="P1" <%= !assignedSlots.has('P1') ? '' : 'disabled' %>>P1</option>
+                            <option value="P2" <%= !assignedSlots.has('P2') ? '' : 'disabled' %>>P2</option>
+                            <option value="P3" <%= !assignedSlots.has('P3') ? '' : 'disabled' %>>P3</option>
+                            <!-- Add more parking slots as needed -->
+                          </select>
+                        </td>
+                        <td class="assigned-parking-slot"><%= vehicle.parkingSlot || 'Not Assigned' %></td>
+                        <td>
+                          <% if (vehicle.parkingSlot) { %>
+                            <button class="btn btn-success assign-btn" disabled>Assigned</button>
+                          <% } else { %>
+                            <button class="btn btn-primary assign-btn" data-user-id="<%= user._id %>" data-vehicle-id="<%= vehicle._id %>">Assign</button>
+                          <% } %>
+                        </td>
+                        <td>
+
+                          <% if (vehicle.parkingSlot) { %>
+                            <button class="btn btn-warning reassign-btn" data-user-id="<%= user._id %>" data-vehicle-id="<%= vehicle._id %>">Reassign</button>
+                          <% } else { %>
+                            <button class="btn btn-warning reassign-btn" data-user-id="<%= user._id %>" disabled data-vehicle-id="<%= vehicle._id %>">Reassign</button>
+                          <% } %>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- Include the following script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const card = document.querySelector('.card-animation');
+      card.classList.add('animated', 'slideIn');
+    });
+
+    // Handle assign button click
+    const assignButtons = document.querySelectorAll('.assign-btn');
+    assignButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const userId = button.getAttribute('data-user-id');
+        const vehicleId = button.getAttribute('data-vehicle-id');
+        const parkingSlot = button.parentNode.parentNode.querySelector('.parking-slot').value;
+
+        // Send a POST request to update parking slot
+        fetch('assign-parking', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId, vehicleId, parkingSlot }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response if needed
+            console.log(data);
+            location.reload();
+            // Update the parking slot value in the UI
+            const row = button.parentNode.parentNode;
+            const parkingSlotCell = row.querySelector('.parking-slot');
+            parkingSlotCell.value = parkingSlot;
+
+            // Update the assigned parking slot value in the UI
+            const assignedParkingSlotCell = row.querySelector('.assigned-parking-slot');
+            assignedParkingSlotCell.textContent = parkingSlot;
+
+            // Disable the assign button and mark it as assigned
+            button.disabled = true;
+            button.textContent = 'Assigned';
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-success');
+
+           // Enable the reassign button
+          const reassignButton = row.querySelector('.reassign-btn');
+          reassignButton.disabled = false;
+
+          })
+          .catch(error => {
+            // Handle the error if occurred
+            console.error(error);
+          });
+      });
+    });
+
+    // Handle reassign button click
+    const reassignButtons = document.querySelectorAll('.reassign-btn');
+    reassignButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const userId = button.getAttribute('data-user-id');
+        const vehicleId = button.getAttribute('data-vehicle-id');
+        const parkingSlot = button.parentNode.parentNode.querySelector('.parking-slot').value;
+
+        // Send a POST request to update parking slot
+        fetch('assign-parking', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId, vehicleId, parkingSlot }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response if needed
+            console.log(data);
+            location.reload();
+          })
+          .catch(error => {
+            // Handle the error if occurred
+            console.error(error);
+          });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<%- include('side_bar.ejs'); -%>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/allusers.css">
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div style="margin-left: 236px;" class="col-lg-11">
+        <div class="card table-red card-animation">
+          <div class="card-body">
+            <h2 class="text-center text-black mb-4">Car Details</h2>
+            
+            <!-- Filter and search form -->
+            <form class="mb-4">
+              <div class="form-row align-items-center">
+                <div class="col-md-3 mb-2">
+                  <select class="form-control" id="filterDropdown">
+                    <option value="all">All</option>
+                    <option value="fname">First Name</option>
+                    <option value="lname">Last Name</option>
+                    <option value="name">Username</option>
+                    <option value="flatno">Flat No</option>
+                    <option value="wingname">Wing Name</option>
+                    <option value="email">Email Id</option>
+                    <option value="phno">Phone No</option>
+                    <option value="password">Password</option>
+
+                  </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                  <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                </div>
+                <div class="col-md-3 mb-2">
+                  <button type="button" class="btn btn-primary" onclick="filterTable()">Filter/Search</button>
+                </div>
+              </div>
+            </form>
+            
+            <div class="table-responsive">
+              <table class="table table-bordered mb-0" id="dataTable">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Flat No</th>
+                    <th>Wing Name</th>
+                    <th>Email Id</th>
+                    <th>Phone No</th>
+                    <th>Password</th>
+                    <th>Photo</th>
+                    <th>Gov doc</th>
+                    <th>Verification</th>
+                  </tr>
+                </thead>
+                <% if (signups.length > 0) { %>
+                <tbody>
+                  <% signups.forEach(function(signup) { %>
+                  <tr>
+                    <td><%= signup.fname %></td>
+                    <td><%= signup.lname %></td>
+                    <td><%= signup.name %></td>
+                    <td><%= signup.flatno %></td>
+                    <td><%= signup.wingname %></td>
+                    <td><%= signup.email %></td>
+                    <td><%= signup.phno %></td>
+                    <td><%= signup.password %></td>
+                    <td><a href="/uploads/<%= signup.profilePicture %>">View Profile Picture</a></td>
+                    <td><a href="/uploads/<%= signup.govtPaper %>">View Government Paper</a></td>
+                    <td>
+                      <% if (signup.status === 'approved') { %>
+                        <button class="btn btn-verify" disabled>
+                          <span class="btn-text">Verified</span>
+                          <span class="btn-bg"></span>
+                        </button>
+                      <% } else { %>
+                        <button class="btn btn-verify" onclick="changeText(this, '<%= signup._id %>')">
+                          <span class="btn-text">Verify</span>
+                          <span class="btn-bg"></span>
+                        </button>
+                      <% } %>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+                <% } else { %>
+                <p>No signups found.</p>
+                <% } %>
+              </table>
+            </div>
+
+            <!-- Add a button for downloading table data -->
+            <div class="text-center mt-4">
+              <button type="button" class="btn btn-primary" onclick="exportTableToExcel()">Download Excel</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('partials/footer'); -%>
+
+  <!-- Include Bootstrap JS (Optional) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- Apply animation to the card on page load -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const card = document.querySelector('.card-animation');
+      card.classList.add('animated', 'slideIn');
+    });
+
+    function changeText(button, signupId) {
+      console.log(signupId);
+      fetch(`updatestatus/${signupId}`, {
+        method: "POST"
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          if (data.status === 'approved') {
+            button.querySelector('.btn-text').textContent = 'Verified';
+            button.setAttribute('disabled', 'disabled'); // Disable the button to prevent further changes
+          } else {
+            button.querySelector('.btn-text').textContent = 'Verify';
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+    
+    function filterTable() {
+  const filterDropdown = document.getElementById('filterDropdown');
+  const searchInput = document.getElementById('searchInput');
+  const dataTable = document.getElementById('dataTable');
+  const rows = dataTable.getElementsByTagName('tr');
+  const filterIndex = filterDropdown.selectedIndex;
+  const searchText = searchInput.value.toLowerCase();
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const columns = row.getElementsByTagName('td');
+    let showRow = false;
+
+    if (filterIndex === 0) {
+      // Filter by all columns
+      for (let j = 0; j < columns.length; j++) {
+        const columnText = columns[j].textContent.toLowerCase();
+        if (columnText.includes(searchText)) {
+          showRow = true;
+          break;
+        }
+      }
+    } else {
+      // Filter by selected column
+      const columnText = columns[filterIndex - 1].textContent.toLowerCase();
+
+      // Special case for Wing Name column
+      if (filterIndex === 5 && columnText.trim().toLowerCase().includes(searchText)) {
+        showRow = true;
+      } else if (columnText.includes(searchText)) {
+        showRow = true;
+      }
+    }
+
+    if (showRow) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  }
+}
+
+
+    function exportTableToExcel() {
+      const table = document.getElementById('dataTable');
+      const rows = Array.from(table.getElementsByTagName('tr'));
+
+      // Prepare the data array for Excel export
+      const data = rows.map(row => Array.from(row.children).map(cell => cell.textContent));
+
+      // Create a new workbook
+      const workbook = XLSX.utils.book_new();
+
+      // Add a worksheet
+      const worksheet = XLSX.utils.aoa_to_sheet(data);
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Table Data');
+
+      // Export the workbook to Excel file
+      XLSX.writeFile(workbook, 'table_data.xlsx');
+    }
+  </script>
+
+
+
+</body>

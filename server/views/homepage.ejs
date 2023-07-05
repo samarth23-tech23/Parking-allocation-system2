@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Parking Website</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="\homepage.css">
+
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <!-- <a class="navbar-brand" href="#">Car Parking</a> -->
+      <img src="/images/logorg.png" height="70px" width="70px">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#loginsec" id="login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="" id="#registersec" register>Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="sectionimg text-white">
+    <div class="containercontact">
+      <h1 class="display-4">Welcome to Car Parking</h1>
+      <p class="lead">We provide secure and convenient parking solutions for your vehicles.</p>
+      <a href="#contact" class="btn btn-primary btn-lg">Get Started</a>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="containerabout">
+      <h2>About Us</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt velit vitae eros ullamcorper,
+        a consectetur tortor maximus. Suspendisse fermentum ipsum non faucibus lobortis.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section bg-light">
+    <div class="containerservice">
+      <h2>Our Services</h2>
+      <div class="row">
+        <div class="col-lg-4">
+          <h4>Secure Parking</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in magna eget ligula tempus commodo.</p>
+        </div>
+        <div class="col-lg-4">
+          <h4>24/7 Access</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in magna eget ligula tempus commodo.</p>
+        </div>
+        <div class="col-lg-4">
+          <h4>Convenient Locations</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in magna eget ligula tempus commodo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- login -->
+<div class="main" id="loginsec">
+ <%- include('login');-%>
+</div>
+
+<hr>
+<!-- register -->
+<div class="main" id="registersec">
+  <%- include('signup');-%>
+</div>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container1">
+      <h2>Contact Us</h2>
+      <p>Have questions? Get in touch with us.</p>
+      <div class="row">
+        <div class="col-lg-6 mx-auto">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="section bg-dark text-white">
+    <div class="container1">
+      <p>&copy; 2023 Car Parking. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Smooth Scrolling -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+      // Collapse navigation menu on click
+      $('.navbar-nav>li>a').on('click', function () {
+        $('.navbar-collapse').collapse('hide');
+      });
+    
+  </script>
+</body>
+</html>
