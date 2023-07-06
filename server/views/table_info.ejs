@@ -232,18 +232,19 @@ assignParkingBtn.addEventListener('click', function() {
     const parkingSlotSelect = button.parentNode.parentNode.querySelector('.parking-slot');
     const parkingSlotOptions = parkingSlotSelect.querySelectorAll('option');
 
-    // Find the next available parking slot
-    let parkingSlot;
-    while (currentIndex < parkingSlotOptions.length) {
-      const option = parkingSlotOptions[currentIndex];
-      if (!option.disabled) {
-        parkingSlot = option.value;
-        option.disabled = true;
-        currentIndex++;
-        break;
-      }
-      currentIndex++;
-    }
+   // Find the next available parking slot
+let parkingSlot;
+while (currentIndex < parkingSlotOptions.length) {
+  const option = parkingSlotOptions[currentIndex];
+  if (!option.disabled && option.value !== '') {
+    parkingSlot = option.value;
+    option.disabled = true;
+    currentIndex++;
+    break;
+  }
+  currentIndex++;
+}
+
 
     if (parkingSlot) {
       // Send a POST request to update parking slot
