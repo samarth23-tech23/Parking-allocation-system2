@@ -1,0 +1,54 @@
+body {
+    background-color: #f8f9fa;
+  }
+  .containerlogin {
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  .containerlogin h1 {
+    color: #970808;
+    text-shadow: 2px 2px #ff5d5dd7, -2px -2px #ffffff;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  .containerlogin .form-control {
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    background-color: #f1ebeb;
+    border: none;
+    color: #333;
+  }
+  .containerlogin .form-control:focus {
+    background-color: #fff0c7;
+  }
+  .containerlogin .btn-primary {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    padding: 8px;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .containerlogin .btn-primary:hover {
+    background-color: #ffca3a;
+    border-color: #ffca3a;
+    transform: scale(1.05);
+  }
+  .containerlogin .notsigned {
+    margin-top: 20px;
+    text-align: center;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+  .containerlogin .notsigned a {
+    color: #b10d0d;
+    text-decoration: none;
+  }
+  .containerlogin .notsigned a:hover {
+    font-weight: bold;
+  }

@@ -1,0 +1,77 @@
+    /* Custom styles */
+    html {
+      scroll-behavior: smooth;
+    }
+        body {
+          padding-top: 70px;
+        }
+    
+        .section {
+          padding: 80px 0;
+          text-align: center;
+         
+        }
+
+       
+    
+        .sectionimg {
+          background-image: url('/images/bg.jpeg');
+          padding: 100px 0;
+          text-align: center;
+          height: 37rem;
+          background-repeat: no-repeat;
+        }
+    
+        .sectionimg h1{
+          
+          color: #000000;
+
+          /* text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 0px -4px 10px rgba(0, 0, 0, 0.3); */
+          text-shadow: 4px 4px 0px rgba(255, 196, 1, 0.863);
+              font-weight: bold;
+              margin-top: 8rem;
+            
+        }
+
+        .sectionimg h3 {
+          color: #ffffff;
+
+          text-shadow: 2px 7px 5px rgb(0, 0, 0), 0px -4px 10px rgb(255, 187, 1);
+         
+              font-weight: bold;
+              margin-top: 1rem;
+        }
+    
+        
+    
+        .sectionimg .btn-primary {
+          background-color: #ffcc00;
+          border-color: #ffcc00;
+        }
+        
+    
+        #about,
+        #services,
+        #contact {
+          padding: 100px 0;
+          text-align: center;
+        }
+    
+        #contact .form-control {
+          border-radius: 20px;
+        }
+    
+        #contact button.btn-primary {
+          width: 100%;
+        }
+    
+        footer {
+          padding: 20px 0;
+          text-align: center;
+          background-color: #333;
+        }
+    
+        footer p {
+          margin: 0;
+          color: #fff;
+        }

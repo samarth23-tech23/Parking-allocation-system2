@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Parking Website</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="\homepage.css">
+  <link rel='icon' href='/images/favicon.ico' type="image/x-icon">
+
+
+</head>
+
+<body>
+<%- include('./partials/homenav'); -%>
+  <!-- Hero Section -->
+  <header class="sectionimg text-white">
+    <div class="containercontact">
+      <h1 class="display-4">Welcome to Car Parking</h1>
+      <h3 class="lead">We provide secure and convenient parking solutions for your vehicles.</h3>
+      <a href="#contact" class="btn btn-primary btn-lg">Get Started</a>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="containerabout">
+      <h2>About Us</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt velit vitae eros ullamcorper,
+        a consectetur tortor maximus. Suspendisse fermentum ipsum non faucibus lobortis.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section bg-light">
+    <div class="containerservice">
+      <h2>Our Services</h2>
+      <div class="row">
+        <div class="col-lg-4">
+          <h4>Secure Parking</h4>
+          <p>Your vehicle's safety is our utmost priority. We maintain high-security standards to provide you with a safe and secure parking environment. Our parking lots are equipped with state-of-the-art surveillance systems, well-lit areas, and regular patrols to ensure the protection of your vehicle from theft or damage.</p>
+          <img src="./images/pparking.jpg" width="400px" height="280px">
+        </div>
+        <div class="col-lg-4">
+          <h4>24/7 Access</h4>
+          <p> we provide round-the-clock parking access. Whether you need to park your car during the day or in the middle of the night, our parking facilities are open 24/7 to accommodate your schedule.</p>
+          <img src="./images/service1.jpg" width="200px" height="250px">
+        </div>
+        <div class="col-lg-4">
+          <h4>Convenient Locations</h4>
+          <p>We offer spacious parking lots to accommodate vehicles of all sizes. Whether you're driving a compact car, an SUV, or even a larger vehicle, our parking spaces provide ample room for you to park comfortably. You won't have to worry about squeezing your car into a tight spot or maneuvering through narrow aisles.</p>
+          <img src="./images/sparking.jpg" width="200px" height="250px">
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- login -->
+<div class="main" id="loginsec">
+ <%- include('login');-%>
+</div>
+
+<hr>
+<!-- register -->
+<div class="main" id="registersec">
+  <%- include('signup');-%>
+</div><hr>
+
+  <!-- Contact Section -->
+<%- include('contactus'); -%>
+
+  <!-- Footer Section -->
+  <%- include('./partials/footer'); -%>
+
+  <!-- Smooth Scrolling -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+      // Collapse navigation menu on click
+      $('.navbar-nav>li>a').on('click', function () {
+        $('.navbar-collapse').collapse('hide');
+      });
+    
+  </script>
+</body>
+</html>
