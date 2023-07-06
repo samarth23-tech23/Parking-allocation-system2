@@ -71,6 +71,9 @@
         <div class="card table-red card-animation">
           <div class="card-body">
             <h2 class="text-center text-black mb-4">Car Details</h2>
+            <div class="text-center mb-4">
+              <button id="assign-parking-btn" class="btn btn-primary">Assign Parking</button>
+            </div>
             <div class="table-responsive">
               <table class="table table-bordered mb-0">
                 <thead>
@@ -109,6 +112,12 @@
                             <option value="P1" <%= !assignedSlots.has('P1') ? '' : 'disabled' %>>P1</option>
                             <option value="P2" <%= !assignedSlots.has('P2') ? '' : 'disabled' %>>P2</option>
                             <option value="P3" <%= !assignedSlots.has('P3') ? '' : 'disabled' %>>P3</option>
+                            <option value="P4" <%= !assignedSlots.has('P4') ? '' : 'disabled' %>>P4</option>
+                            <option value="P5" <%= !assignedSlots.has('P5') ? '' : 'disabled' %>>P5</option>
+                            <option value="P6" <%= !assignedSlots.has('P6') ? '' : 'disabled' %>>P6</option>
+                            <option value="P7" <%= !assignedSlots.has('P7') ? '' : 'disabled' %>>P7</option>
+                            <option value="P8" <%= !assignedSlots.has('P8') ? '' : 'disabled' %>>P8</option>
+                            <option value="P9" <%= !assignedSlots.has('P9') ? '' : 'disabled' %>>P9</option>
                             <!-- Add more parking slots as needed -->
                           </select>
                         </td>
@@ -196,6 +205,92 @@
           });
       });
     });
+
+
+
+// Handle assign button click
+const assignParkingBtn = document.getElementById('assign-parking-btn');
+assignParkingBtn.addEventListener('click', function() {
+  const parkingSlots = document.querySelectorAll('.parking-slot');
+  const unassignedVehicles = document.querySelectorAll('.assign-btn:not([disabled])');
+  const availableSlots = [...parkingSlots].filter(slot => !slot.value && !slot.disabled);
+
+  if (unassignedVehicles.length === 0 || availableSlots.length === 0) {
+    return; // No unassigned vehicles or available parking slots
+  }
+
+  if (unassignedVehicles.length > availableSlots.length) {
+    alert('Insufficient parking slots available!');
+    return;
+  }
+
+  let currentIndex = 0; // Current index to track available slots
+  for (let i = 0; i < unassignedVehicles.length; i++) {
+    const button = unassignedVehicles[i];
+    const userId = button.getAttribute('data-user-id');
+    const vehicleId = button.getAttribute('data-vehicle-id');
+    const parkingSlotSelect = button.parentNode.parentNode.querySelector('.parking-slot');
+    const parkingSlotOptions = parkingSlotSelect.querySelectorAll('option');
+
+   // Find the next available parking slot
+let parkingSlot;
+while (currentIndex < parkingSlotOptions.length) {
+  const option = parkingSlotOptions[currentIndex];
+  if (!option.disabled && option.value !== '') {
+    parkingSlot = option.value;
+    option.disabled = true;
+    currentIndex++;
+    break;
+  }
+  currentIndex++;
+}
+
+
+    if (parkingSlot) {
+      // Send a POST request to update parking slot
+      fetch('assign-parking', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, vehicleId, parkingSlot }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response if needed
+          console.log(data);
+          // Update the parking slot value in the UI
+          parkingSlotSelect.value = parkingSlot;
+
+          // Update the assigned parking slot value in the UI
+          const assignedParkingSlotCell = button.parentNode.parentNode.querySelector('.assigned-parking-slot');
+          assignedParkingSlotCell.textContent = parkingSlot;
+
+          // Disable the assign button and mark it as assigned
+          button.disabled = true;
+          button.textContent = 'Assigned';
+          button.classList.remove('btn-primary');
+          button.classList.add('btn-success');
+
+          // Enable the reassign button
+          const reassignButton = button.parentNode.parentNode.querySelector('.reassign-btn');
+          reassignButton.disabled = false;
+        })
+        .catch(error => {
+          // Handle the error if occurred
+          console.error(error);
+        });
+    }
+  }
+});
+
+
+
+
+
+
+
 
     // Handle reassign button click
     const reassignButtons = document.querySelectorAll('.reassign-btn');
