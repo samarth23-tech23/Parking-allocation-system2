@@ -1,0 +1,132 @@
+<!-- Navigation -->
+<head>
+<style>
+.navbar {
+  background-color: #fdd835;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeInDown 0.5s ease-in-out;
+}
+
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url('https://cdn.naykka.com/images/menu-icon.png');
+}
+
+.navbar-toggler-icon:focus {
+  outline: none;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 20px;
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fff;
+}
+
+.navbar-brand img {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.navbar-collapse {
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.navbar-brand {
+  font-family: 'Arial', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-toggler-icon {
+  background-image: url('https://cdn.naykka.com/images/menu-icon.png');
+  animation: spin 1s linear infinite;
+}
+
+
+  </style>
+  </head>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-yellow">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="/images/logorg.png" height="70px" width="70px" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#loginsec" id="login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#registersec" id="register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="profile">Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

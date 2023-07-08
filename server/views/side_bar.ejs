@@ -8,9 +8,38 @@
   <link rel="stylesheet" href="/sidebar.css">
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link rel='icon' href='/favicon.ico' type="image/x-icon">
 
+  <style>
+    /* Add CSS styles for logout button and theme */
+    .topbar {
+      background-color: rgb(247, 247, 247);
+      padding: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logout-btn {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <!-- Top navbar -->
+  <div class="topbar">
+    <div class="toggle">
+    </div>
+    <img src="/images/adminbg.png" class="logoimg">
+    <button class="logout-btn"><a href="logout">Logout</button>
+  </div>
+
+  <!-- Sidebar -->
   <div class="sidebar">
     <div class="logo_details">
       <div class="logo_name">
@@ -20,9 +49,9 @@
     <ul>
       <div id="sdiv">
         <li>
-          <a href="dashboard" class="<%= activePage === 'dashboard' ? 'active' : '' %>"> <i class='bx bx-grid-alt'></i>
+          <a href="dashboard" class="<%= activePage === '_card' ? 'active' : '' %>"><i style="color:black" class='bx bx-cart-alt'></i>
             <span class="links_name">
-              Dashboard
+              Parking Slot
             </span>
           </a>
         </li>
@@ -33,40 +62,13 @@
             </span>
           </a>
         </li>
-        <li>
-          <a href="_card" class="<%= activePage === '_card' ? 'active' : '' %>"><i style="color:black" class='bx bx-cart-alt'></i>
-            <span class="links_name">
-              Parking Slot
-            </span>
-          </a>
-        </li>
-        <li style="color:black" class="login">
-          <a href="#">
-            <span class="links_name login_out">
-              Login Out
-            </span>
-            <i class='bx bx-log-out' id="log_out"></i>
-          </a>
-        </li>
       </div>
     </ul>
   </div>
 
-  <!-- top header -->
+  <!-- Rest of the content -->
   <section class="home_section">
-    <div class="topbar">
-      <div class="toggle">
-        <i class='bx bx-menu' id="btn"></i>
-      </div>
-      <div class="search_wrapper">
-        <label>
-          <span>
-            <i class='bx bx-search'></i>
-          </span>
-          <input type="search" placeholder="Search...">
-        </label>
-      </div>
-    </div> 
+    <!-- Your content goes here -->
   </section>
 
   <script>
@@ -74,8 +76,12 @@
     document.getElementById("btn").addEventListener("click", function() {
       document.querySelector(".sidebar").classList.toggle("active");
     });
+
+    // Logout functionality
+    document.querySelector(".logout-btn").addEventListener("click", function() {
+      // Add your logout logic here
+      console.log("Logout clicked");
+    });
   </script>
-  
-  
 </body>
 </html>

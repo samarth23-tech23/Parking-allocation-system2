@@ -4,9 +4,34 @@ const router=express.Router();
 const Signup=require("./mongodb");
 const mongoose=require("mongoose");
 const { ObjectId } = mongoose.Types;
+const nodemailer = require("nodemailer");
+
+// Create a transporter object for sending emails
+const transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: "www.samarthamodkar@gmail.com",
+    pass: "wbkcxpcjqftuppkw",
+  },
+});
 
 router.get("/dashboard", (req, res) => {
-  res.render('dashboard', { activePage: 'dashboard' });
+  res.render('_card', { activePage: '_card' });
+});
+
+router.get("/logout", (req, res) => {
+    res.redirect("/");
+  });
+router.get("/un-parking", async (req, res) => {
+  try {
+    // Retrieve user data from MongoDB
+    const users = await Signup.find({ parkingSlot: { $exists: false } });
+
+    res.render('unassigned', { activePage: '_card', users });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 router.get("/alluser",(req,res)=>{
@@ -21,9 +46,7 @@ router.get("/alluser",(req,res)=>{
       });
 
 
- router.get("/_card", (req, res) => {
-        res.render('_card', { activePage: '_card' });
-      });
+
 
 router.get('/table_info', async (req, res) => {
   try {
@@ -90,7 +113,7 @@ router.post('/updatestatus/:id', async (req, res) => {
       if (!updatedRecord) {
         return res.status(404).json({ error: 'Record not found' });
       }
-  
+      sendVerificationEmail(updatedRecord.email);
       return res.json(updatedRecord);
     } catch (error) {
       console.error(error);
@@ -99,7 +122,22 @@ router.post('/updatestatus/:id', async (req, res) => {
   });
 
   
-
+  function sendVerificationEmail(email) {
+    const mailOptions = {
+      from: "www.samarthamodkar@gmail.com",
+      to: email,
+      subject: "Verification Email",
+      text: "Congratulations! Your account has been verified. Please Log in and Upload the Deposit Cheque photo and RC book",
+    };
+  
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log("Error sending email:", error);
+      } else {
+        console.log("Email sent:", info.response);
+      }
+    });
+  }
 
 
 
