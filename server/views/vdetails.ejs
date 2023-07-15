@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verified Users</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel='icon' href='/images/favicon.ico' type="image/x-icon">
+  <!-- Apply custom styling -->
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .table-red {
+      background-color: #ffffff;
+      color: #721c24;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-red th,
+    .table-red td {
+      text-align: center;
+    }
+
+    .table-red th {
+      background-color: #fa8500;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .table-red tbody tr {
+      transition: background-color 0.3s;
+    }
+
+    .table-red tbody tr:hover {
+      background-color: rgb(241, 170, 0, 0.5);
+      color: black;
+      font-weight: bolder;
+    }
+
+    .table-red tbody td {
+      border-top: none;
+    }
+
+    .card-animation {
+      animation-name: slideIn;
+      animation-duration: 1s;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Include sidebar if needed -->
+  <%- include("side_bar") -%>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div style="margin-left: 236px;" class="col-lg-8">
+        <div class="card table-red card-animation">
+          <div class="card-body">
+            <h2 class="text-center text-black mb-4">Car Details</h2>
+    
+            <div class="table-responsive">
+              <table class="table table-bordered mb-0">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Flat No</th>
+                    <th>Wing Name</th>
+                    <th>Phone No</th>
+                    <th>RC Book</th>
+                    <th>Deposit Cheque</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% users.forEach(function(user) { %>
+                  <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.flatno %></td>
+                    <td><%= user.wingname %></td>
+                    <td><%= user.phno %></td>
+                    <td>
+                      <% if (user.uploadStatus === 'pending') { %>
+                        <% if (user.rcBook) { %>
+                          <a href="/uploads/<%= user.rcBook %>">View</a>
+                        <% } else { %>
+                          -
+                        <% } %>
+                      <% } else { %>
+                        <%= user.rcBook %>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% if (user.uploadStatus === 'pending') { %>
+                        <% if (user.depositCheque) { %>
+                          <a href="/uploads/<%= user.depositCheque %>">View</a>
+                        <% } else { %>
+                          -
+                        <% } %>
+                      <% } else { %>
+                        <%= user.depositCheque %>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% if (user.uploadStatus === 'pending') { %>
+                        <form action="verifyUser" method="POST">
+                          <input type="hidden" name="userId" value="<%= user._id %>">
+                          <button type="submit" class="btn btn-primary" onclick="showSuccessAlert('User accepted successfully')">Accept</button>
+                        </form>
+                      <% } else { %>
+                        <button class="btn btn-success" disabled>Accepted</button>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% if (user.uploadStatus === 'pending') { %>
+                        <form action="rejectUser" method="POST">
+                          <input type="hidden" name="userId" value="<%= user._id %>">
+                          <button type="submit" class="btn btn-danger" onclick="showSuccessAlert('User rejected successfully')">Reject</button>
+                        </form>
+                      <% } else { %>
+                        <button class="btn btn-secondary" disabled>Rejected</button>
+                      <% } %>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script>
+    function showSuccessAlert(message) {
+      alert(message);
+    }
+  </script>
+</body>
+</html>
