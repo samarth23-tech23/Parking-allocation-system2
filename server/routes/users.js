@@ -120,10 +120,10 @@ router.post(
       // Save the signup data to the database
       await newSignup.save();
       console.log("Signup data saved to MongoDB");
-      res.send("Signup data saved to MongoDB");
+      res.render("thanku");
     } catch (err) {
       console.error("Error saving signup data to MongoDB:", err);
-      res.status(500).send("Error saving signup data to MongoDB");
+      res.status(500).render("505");
     }
   }
 );
@@ -134,7 +134,7 @@ router.get("/profile", requireLogin, async (req, res) => {
     const user = await Signup.findById(req.session.userId);
 
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).render("404");
     }
 
     if (user.status === "approved") {
@@ -156,7 +156,7 @@ router.post("/addVehicle", requireLogin, async (req, res) => {
     const user = await Signup.findById(req.session.userId);
 
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).render("404");
     }
 
     if (user.status !== "approved") {
@@ -178,7 +178,7 @@ router.post("/addVehicle", requireLogin, async (req, res) => {
     res.redirect("profile");
   } catch (error) {
     console.error("Error adding vehicle details:", error);
-    res.status(500).send("Error adding vehicle details");
+    res.status(500).render("505");
   }
 });
 
@@ -215,7 +215,7 @@ router.post(
       res.redirect("profile");
     } catch (error) {
       console.error("Error uploading documents:", error);
-      res.status(500).send("Error uploading documents");
+      res.status(500).render("500");
     }
   }
 );

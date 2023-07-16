@@ -61,6 +61,11 @@
       }
     }
   </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Include Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- Your custom scripts here -->
+
 </head>
 <body>
   <!-- Include sidebar if needed -->
@@ -95,7 +100,7 @@
                     <td><%= user.wingname %></td>
                     <td><%= user.phno %></td>
                     <td>
-                      <% if (user.uploadStatus === 'pending') { %>
+                      <% if (user.uploadStatus === 'pending' || user.uploadStatus === 'rejected') { %>
                         <% if (user.rcBook) { %>
                           <a href="/uploads/<%= user.rcBook %>">View</a>
                         <% } else { %>
@@ -106,7 +111,7 @@
                       <% } %>
                     </td>
                     <td>
-                      <% if (user.uploadStatus === 'pending') { %>
+                      <% if (user.uploadStatus === 'pending' || user.uploadStatus === 'rejected') { %>
                         <% if (user.depositCheque) { %>
                           <a href="/uploads/<%= user.depositCheque %>">View</a>
                         <% } else { %>
@@ -117,20 +122,24 @@
                       <% } %>
                     </td>
                     <td>
-                      <% if (user.uploadStatus === 'pending') { %>
+                      <% if (user.uploadStatus === 'pending' || user.uploadStatus === 'rejected') { %>
                         <form action="verifyUser" method="POST">
                           <input type="hidden" name="userId" value="<%= user._id %>">
-                          <button type="submit" class="btn btn-primary" onclick="showSuccessAlert('User accepted successfully')">Accept</button>
+                          <% if (user.uploadStatus === 'rejected') { %>
+                            <button type="submit" class="btn btn-primary">Accept</button>
+                          <% } else { %>
+                            <button type="submit" class="btn btn-primary" onclick="updateStatus('<%= user._id %>', 'accepted')">Accept</button>
+                          <% } %>
                         </form>
                       <% } else { %>
                         <button class="btn btn-success" disabled>Accepted</button>
                       <% } %>
                     </td>
                     <td>
-                      <% if (user.uploadStatus === 'pending') { %>
+                      <% if (user.uploadStatus === 'pending' || user.uploadStatus === 'rejected') { %>
                         <form action="rejectUser" method="POST">
                           <input type="hidden" name="userId" value="<%= user._id %>">
-                          <button type="submit" class="btn btn-danger" onclick="showSuccessAlert('User rejected successfully')">Reject</button>
+                          <button type="submit" class="btn btn-danger" onclick="updateStatus('<%= user._id %>', 'rejected')">Reject</button>
                         </form>
                       <% } else { %>
                         <button class="btn btn-secondary" disabled>Rejected</button>
@@ -150,6 +159,7 @@
   <!-- Include Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script>
+  
     function showSuccessAlert(message) {
       alert(message);
     }
