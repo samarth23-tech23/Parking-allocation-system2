@@ -15,21 +15,10 @@
     
   }
   
-  body{
+body {
     background-color: #f9f9f9;
   }
-  /* topbar */
 
-    /* .home_section {
-    position: relative;
-    width: calc(100% - 250px);
-    min-height: 100vh;
-    left: 250px;
-    top: 0;
-    background: #E4E9E7;
-    transition: all 0.5s ease;
-  } */
-  
   .home_section .topbar {
     position: relative;
     width: 100%;
@@ -52,67 +41,7 @@
     cursor: pointer;
   }
   
-  .home_section .topbar .search_wrapper {
-    position: relative;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    overflow-x: hidden;
-  }
-  
-  .home_section .topbar .search_wrapper input {
-    position: relative;
-    height: 100%;
-    padding: 0.5rem;
-    border: none;
-    outline: none;
-  }
-  
-  .home_section .topbar .search_wrapper span {
-    display: inline-block;
-    padding: 0rem 1rem;
-    transform: translateY(20%);
-    font-size: 1.5rem;
-  }
-  
-  .home_section .topbar .toggle {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    cursor: pointer;
-  }
-  
-  .home_section .topbar .search_wrapper {
-    position: relative;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    overflow-x: hidden;
-  }
-  
-  .home_section .topbar .search_wrapper input {
-    position: relative;
-    height: 100%;
-    padding: 0.5rem;
-    border: none;
-    outline: none;
-  }
-  
-  .home_section .topbar .search_wrapper span {
-    display: inline-block;
-    padding: 0rem 1rem;
-    transform: translateY(20%);
-    font-size: 1.5rem;
-  }
-  
+
 
   .sidebar {
     position: fixed;
@@ -147,7 +76,7 @@
     font-size: 28px;
     line-height: 60px;
     text-align: center;
-    color: var(--white);
+    color: var(--dark-blue);
   }
   
   .sidebar .logo_details .logo_name {
@@ -173,7 +102,9 @@
     border-radius: 30px 0px 0px 30px;
     transition: all 0.5s ease;
   }
-  
+  .logout-btn{
+    color: black;
+  }
   .sidebar ul li a .links_name {
     font-size: 15px;
     font-weight: 400;
@@ -191,16 +122,6 @@
     background: #ffffff;
     transition: all 0.5s ease;
     color: #11101D;
-  }
-  
-  .sidebar .login #log_out {
-    position: absolute;
-    height: 60px;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 60px;
-    transition: all 0.5s ease;
   }
   
   .sidebar li a.active {
@@ -277,3 +198,11 @@
       display: block;
     }
   }
+
+.logoimg{
+  margin-bottom: 1rem;
+  width: 90px;
+  height: 71px;
+  margin-left: 70rem;
+}
+

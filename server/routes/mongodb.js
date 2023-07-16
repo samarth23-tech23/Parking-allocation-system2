@@ -74,7 +74,21 @@
             default: "",
           },
         },
-      ]
+      ],
+      rcBook: {
+        type: String,
+        default: "",
+      },
+      depositCheque: {
+        type: String,
+        default: "",
+      },
+      uploadStatus:{
+        type:String,
+        required:"true",
+        default:"pending"
+      }
+
     });
     
     const Signup = new mongoose.model("Signup", signupSchema);

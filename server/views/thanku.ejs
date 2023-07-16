@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thank You for Registering</title>
+    <style>
+        /* CSS for the page layout */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 606px;
+            margin: 0 auto;
+            padding: 42px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+          }
+
+        h1 {
+            color: #333333;
+        }
+
+        p {
+            color: #666666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .tick {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #ffc107;
+            color: #ffffff;
+            font-size: 50px;
+            line-height: 80px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #ffffff;
+            background-color: #ffc107;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #ffd900;
+        }
+
+        /* CSS for the tick animation */
+        @keyframes tick {
+            0% {
+                transform: scale(0);
+            }
+            80% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .tick-animation {
+            animation: tick 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tick tick-animation">&#10004;</div>
+        <h1>Thank You for Registering</h1>
+        <p>We appreciate your registration. You are now a part of our community.</p>
+        <a href="/">Go to Home Page</a>
+    </div>
+</body>
+</html>

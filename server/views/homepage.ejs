@@ -8,46 +8,18 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="\homepage.css">
+  <link rel='icon' href='/images/favicon.ico' type="image/x-icon">
+
 
 </head>
 
 <body>
-  <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <!-- <a class="navbar-brand" href="#">Car Parking</a> -->
-      <img src="/images/logorg.png" height="70px" width="70px">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#loginsec" id="login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="" id="#registersec" register>Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
+<%- include('./partials/homenav'); -%>
   <!-- Hero Section -->
   <header class="sectionimg text-white">
     <div class="containercontact">
       <h1 class="display-4">Welcome to Car Parking</h1>
-      <p class="lead">We provide secure and convenient parking solutions for your vehicles.</p>
+      <h3 class="lead">We provide secure and convenient parking solutions for your vehicles.</h3>
       <a href="#contact" class="btn btn-primary btn-lg">Get Started</a>
     </div>
   </header>
@@ -68,15 +40,18 @@
       <div class="row">
         <div class="col-lg-4">
           <h4>Secure Parking</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in magna eget ligula tempus commodo.</p>
+          <p>Your vehicle's safety is our utmost priority. We maintain high-security standards to provide you with a safe and secure parking environment. Our parking lots are equipped with state-of-the-art surveillance systems, well-lit areas, and regular patrols to ensure the protection of your vehicle from theft or damage.</p>
+          <img src="./images/pparking.jpg" width="400px" height="280px">
         </div>
         <div class="col-lg-4">
           <h4>24/7 Access</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in magna eget ligula tempus commodo.</p>
+          <p> we provide round-the-clock parking access. Whether you need to park your car during the day or in the middle of the night, our parking facilities are open 24/7 to accommodate your schedule.</p>
+          <img src="./images/service1.jpg" width="200px" height="250px">
         </div>
         <div class="col-lg-4">
           <h4>Convenient Locations</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in magna eget ligula tempus commodo.</p>
+          <p>We offer spacious parking lots to accommodate vehicles of all sizes. Whether you're driving a compact car, an SUV, or even a larger vehicle, our parking spaces provide ample room for you to park comfortably. You won't have to worry about squeezing your car into a tight spot or maneuvering through narrow aisles.</p>
+          <img src="./images/sparking.jpg" width="200px" height="250px">
         </div>
       </div>
     </div>
@@ -91,38 +66,13 @@
 <!-- register -->
 <div class="main" id="registersec">
   <%- include('signup');-%>
-</div>
+</div><hr>
 
   <!-- Contact Section -->
-  <section id="contact" class="section">
-    <div class="container1">
-      <h2>Contact Us</h2>
-      <p>Have questions? Get in touch with us.</p>
-      <div class="row">
-        <div class="col-lg-6 mx-auto">
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Name">
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" rows="4" placeholder="Message"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+<%- include('contactus'); -%>
 
   <!-- Footer Section -->
-  <footer class="section bg-dark text-white">
-    <div class="container1">
-      <p>&copy; 2023 Car Parking. All rights reserved.</p>
-    </div>
-  </footer>
+  <%- include('./partials/footer'); -%>
 
   <!-- Smooth Scrolling -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -30,7 +30,7 @@ router.use(
 // Middleware to check if user is logged in
 const requireLogin = (req, res, next) => {
   if (!req.session.userId) {
-    res.redirect("/login");
+    res.redirect("/#loginsec");
   } else {
     next();
   }
@@ -111,16 +111,19 @@ router.post(
         govtPaper: req.files["govtPaper"][0].filename,
         fcfsOrder: count + 1, // Set the FCFS order based on the current count
         vehicleDetails:[],
+        rcbook:"",
+        depositCheque:"",
         status: "pending", // Set the default status to "pending"
+        uploadStatus:"pending"// Set the default upload documents status to "pending"
       });
 
       // Save the signup data to the database
       await newSignup.save();
       console.log("Signup data saved to MongoDB");
-      res.send("Signup data saved to MongoDB");
+      res.render("thanku");
     } catch (err) {
       console.error("Error saving signup data to MongoDB:", err);
-      res.status(500).send("Error saving signup data to MongoDB");
+      res.status(500).render("505");
     }
   }
 );
@@ -131,7 +134,7 @@ router.get("/profile", requireLogin, async (req, res) => {
     const user = await Signup.findById(req.session.userId);
 
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).render("404");
     }
 
     if (user.status === "approved") {
@@ -153,7 +156,7 @@ router.post("/addVehicle", requireLogin, async (req, res) => {
     const user = await Signup.findById(req.session.userId);
 
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).render("404");
     }
 
     if (user.status !== "approved") {
@@ -175,8 +178,46 @@ router.post("/addVehicle", requireLogin, async (req, res) => {
     res.redirect("profile");
   } catch (error) {
     console.error("Error adding vehicle details:", error);
-    res.status(500).send("Error adding vehicle details");
+    res.status(500).render("505");
   }
 });
+
+
+
+
+router.post(
+  "/uploadDocuments",
+  requireLogin,
+  upload.fields([
+    { name: "rcBook", maxCount: 1 },
+    { name: "depositCheque", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      // Find the user by ID
+      const user = await Signup.findById(req.session.userId);
+
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+
+      if (user.status !== "approved") {
+        return res.status(403).send("User is not approved");
+      }
+
+      // Save the filenames in the user object
+      user.rcBook = req.files["rcBook"][0].filename;
+      user.depositCheque = req.files["depositCheque"][0].filename;
+
+      // Save the updated user object
+      await user.save();
+
+      res.redirect("profile");
+    } catch (error) {
+      console.error("Error uploading documents:", error);
+      res.status(500).render("500");
+    }
+  }
+);
 
 module.exports = router;
